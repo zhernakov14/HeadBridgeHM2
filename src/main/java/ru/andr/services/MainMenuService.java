@@ -30,22 +30,29 @@ public class MainMenuService {
                 case "a":
                     if(dataService.loadDataFromFile()) {
                         System.out.println("Данные загружены");
+                        menuShower.showEditMenu();
+                        editorMenuService.start(scanner);
                     }
-                    menuShower.showMainMenu();
+                    else {
+                        menuShower.showMainMenu();
+                    }
                     break;
                 case "b":
                     if(dataService.createDataFile()) {
                         System.out.println("Файл создан");
                     }
-                    menuShower.showMainMenu();
+                    menuShower.showEditMenu();
+                    editorMenuService.start(scanner);
                     break;
                 case "c":
                     System.out.println("Выход");
+                    break;
                 default:
                     System.out.println("Выберите один из трех предложенных вариантов");
                     menuShower.showMainMenu();
             }
         }
+        dataService.saveDataToFile();
     }
 
 }
